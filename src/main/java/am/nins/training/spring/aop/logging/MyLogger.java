@@ -19,7 +19,7 @@ public class MyLogger {
 
 	}
 
-	@Around("allMethods()")
+	@Around("@annotation(am.nins.training.spring.aop.anotations.ShowTime)&&allMethods()")
 	public Object watchTime(ProceedingJoinPoint joinpoint) {
 		long start = System.currentTimeMillis();
 		System.out.println("method begin: " + joinpoint.getSignature().toShortString());
@@ -41,7 +41,7 @@ public class MyLogger {
 		return output;
 	}
 
-	@AfterReturning(pointcut = "allMethods()",returning = "obj")
+	@AfterReturning(pointcut = "@annotation(am.nins.training.spring.aop.anotations.ShowResult)&&allMethods()",returning = "obj")
 	public void print(Object obj){
 		System.out.println("start printing!");
 		if (obj instanceof Set){
